@@ -10,10 +10,11 @@ function App() {
     email: "",
     password: "",
     confirmPassword: "",
+    nameError:"",
   });
   return (
     <div className="App">
-      <UserForm inputs={state} setInputs={setState} />
+      <UserForm inputs={state} setInputs={setState}/>
       <Results data={state} />
     </div>
   );
