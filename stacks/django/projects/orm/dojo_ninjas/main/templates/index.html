@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="top">
+        <div class="topLeft">
+            <h1>Add a Dojo</h1>
+            <form action="/dojo" method="POST">
+            {%csrf_token%}
+                <p>Name<input name="name" type="text" ></p>
+                <p>City<input name="city" type="text" ></p>
+                <p>State<input name="state" type="text" ></p>
+                <button>Add</button>
+            </form>
+        </div>
+        <div class="topRight">
+            <h1>Add a Ninja</h1>
+            <form action="/ninja" method="POST">
+                {%csrf_token%}
+                <p>First Name<input name="fname" type="text" ></p>
+                <p>Last Name <input name="lname" type="text" ></p>
+                <label for="dojo">Select Dojo</label>
+                <select name="dojo" id="dojo">
+                    {%for dojo in dojo_class%}
+                        <option value={{dojo.id}}>{{dojo.name}}</option>
+                    {% endfor%}
+                </select>
+        <button>Add</button>
+        </div>
+    </div>
+    <div class="bottom">
+        <h1>All the Dojos</h1>
+
+        {% for dojo in dojo_class %}
+            <h2>{{dojo.name}}</h2>
+            <form action="/delete" method="POST">
+                {%csrf_token%}
+                <button value={{dojo.id}}>Delete this dojo</button>
+                <input type="checkbox" id="accept" name={{dojo.name}} value={{dojo.id}}>
+                    <label for={{dojo.name}}> Del?</label>
+            </form>
+            {% for ninja in dojo.ninjas.all%}
+                <p>{{ninja.fname}} {{ninja.lname}}</p>
+            {% endfor %}
+
+        {% endfor %}
+
+    </div>
+</body>
+</html>

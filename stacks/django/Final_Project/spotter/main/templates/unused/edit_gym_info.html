@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{this_gym.name}}</title>
+</head>
+<body>
+    <div>
+        <header><a href="/gym_info/{{this_gym.id}}">Back to {{this_gym.name}}</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a></header>
+    </div>
+    <div class="main_wrapper" style="display: flex;">
+        <div class="profile_div">
+            <div class="gym_image">
+            <img style="width: 300px;" src="{{this_gym.photo}}" alt="">
+            </div>
+            <div class="gym_info">
+                <p>{{this_gym.name}}</p>
+                <p>{{this_gym.location}}</p>
+            </div>
+            <form action="/join_gym" method="POST">
+                {% csrf_token %}
+
+                <input type="hidden" name="user" value="{{user.id}}">
+                <input type="hidden" name="gym" value="{{this_gym.id}}">
+            <button>Join this gym</button>
+            </form>
+        </div>
+        <div class="info_div">
+            <p>{{this_gym.about}}</p>
+            <p>Members:</p>
+            {% if this_gym.members %}
+                {% for members in this_gym.members.all%}
+                <p>{{members.uname}}</p>
+                {% endfor %}
+            {% endif %}
+            <p>Some other stuff</p>
+        </div>
+        <div class="forms">
+			<div class="gym_edit">
+
+                {% if messages %}
+        
+                    {% for message in messages%}
+                        <p style="color: red;">**{{message}}**</p>
+                    {% endfor %}
+            
+                {% endif %}
+				<p>Edit {{this_gym.name}}</p>
+				
+                <form method="POST" name="process_gym_edit" action="/process_gym_edit/{{this_gym.id}}">	
+                    {% csrf_token %}
+					<input required class="field" name="name" required type="text" value="{{this_gym.name}}" /> 
+					<input required class="field" name="location" required type="text" value="{{this_gym.location}}" /> 
+					<textarea required id="about" class="field" name="about" required type="textarea" value="{{this_gym.about}}" cols="30" rows="10"></textarea>
+					
+                    <input type="submit" value="Submit Edit" />
+                    
+				</form>
+			</div>
+    </div>
+    <footer>
+        <form action="/add_gym_photo/{{this_gym.id}}" method="POST">
+            {% csrf_token %}
+            <input name="photo" type="text" placeholder="Add photo URL here">
+            <button>Submit Photo</button>
+        </form>
+    </footer>
+</body>
+</html>
+
+
+

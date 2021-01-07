@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{show_model.title}}Info</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+    <div>
+        <div>
+            <h1>{{show_model.title}} TV Show Info</h1>
+            <a href="/">Back to Shows List</a>
+        </div>
+        
+        <h2>Title:{{show_model.title}}</h2>
+        <p> <span class="bold_titles">Network:</span> {{show_model.network}}</p>
+        <p> <span class="bold_titles">Release Date:</span>  {{show_model.release_date}}</p>
+        <p> <span class="bold_titles">Description:</span>  {{show_model.desc}}</p>
+        <p> <span class="bold_titles">Last Updated:</span>  {{show_model.updated_at}}</p>
+        
+    </div>
+    <div>
+        <a href="/edit/{{show_model.id}}">Edit</a> | <a href="/delete/{{show_model.id}}">Delete</a>
+    </div>
+</body>
+</html>

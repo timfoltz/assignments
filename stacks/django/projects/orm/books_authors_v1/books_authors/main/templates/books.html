@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Book</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+</head>
+<body>
+    <div>
+        <h1>{{book_model.title}}</h1>
+        <h2>ID: {{book_model.id}}</h2>
+        <div class="description_div">
+            <pc id="description">Description:</p>
+            <p class="book_desc" >{{book.desc}}</p>
+        </div>
+        <div>
+            <h4>Authors:</h4>
+            <ul>
+                {%for book in book_model.authors.all%}
+                <li>{{book.fname}} {{book.lname}}</li>
+                {%endfor%}
+            </ul>
+            <form action="/add_auth" method="POST">
+                {%csrf_token%}
+                <label for="add_book">Add Author to book</label>
+                <select name="add_book" id="add_book">
+                    <option value="" disabled selected>-Select your option-</option>
+                    {% for auth in author_model %}
+                    <option value="{{auth.id}}">{{auth.fname}} {{auth.lname}}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" name="book_id" value="{{book_model.id}}">
+                <button>Add</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit {{show_model.title}}</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <div class="body_div">
+        <div>
+            <h1>Edit {{show_model.title}}</h1>
+            <a href="/">Back to Shows List</a>
+            {% if messages %}
+        
+            {% for message in messages%}
+                <p>**{{message}}**</p>
+            {% endfor %}
+        
+        {% endif %}
+        </div>
+        <form action="/process_update/{{show_model.id}}" method="POST" id="update_show">
+            {%csrf_token%}
+            <label for="title">Title</label>
+                <input name="title" id="title" type="text" value="{{show_model.title}}">
+            <div>
+            <label for="network">Network</label>
+                <input name="network" id="network" type="text" value="{{show_model.network}}">
+            <label for="release_date">Release Date</label>
+                <input name="release_date" id="release_date" type="date" value="{{show_model.release_date}}">
+            </div>
+        </form>
+
+    <textarea name="description" form="update_show" id="description" cols="30" rows="10" >{{show_model.desc}}</textarea> <br>
+    <button form="update_show">Update</button> <br>
+        <a href="/show_info/{{show_model.id}}">Go to {{show_model.title}}</a>
+    </div>
+</body>
+</html>

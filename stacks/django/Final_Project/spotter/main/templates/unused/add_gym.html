@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotter Login/Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style_add_gym.css' %}">
+    <!-- <script src="{% static 'js/script.js' %}"></script> -->
+    <!-- <link rel="stylesheet" href="C:\Users\timot\coding_dojo\stacks\django\Final_Project\spotter\main\static\css\style_add_gym.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+    
+            $('#register_gym').on('click', function(){
+                $('.register_gym').siblings().hide();
+                $('.register_gym').slideToggle();
+            });
+            
+            
+            $('#login').on('click', function(){
+                $('.login').siblings().hide();
+                $('.login').slideToggle();
+            });
+            
+            
+            $('#reset').on('click', function(){
+                $('.reset').siblings().hide();
+                $('.reset').slideToggle();
+            });
+            });
+    
+    </script>
+</head>
+<body>
+    <div class="container">
+		<div class="tabs">
+			<ul>
+				<li id="register_gym"><a>Register Gym</a></li>
+			</ul>
+		</div>
+		<div class="forms">
+			<div class="register_gym">
+
+                {% if messages %}
+        
+                    {% for message in messages%}
+                        <p style="color: red;">**{{message}}**</p>
+                    {% endfor %}
+            
+                {% endif %}
+				<p>Register your gym.</p>
+				
+                <form method="POST" name="register_gym" action="/process_add_gym">	
+                    {% csrf_token %}
+					<input required class="field" name="name" required type="text" placeholder="Gym Name" /> 
+					<input required class="field" name="location" required type="text" placeholder="Your City, State" /> 
+					<textarea required id="about" class="field" name="about" required type="textarea" placeholder="Amenities, Hours, Equipment...etc" cols="30" rows="10"></textarea>
+					
+                    <input type="submit" value="Register Gym" />
+                    
+				</form>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>

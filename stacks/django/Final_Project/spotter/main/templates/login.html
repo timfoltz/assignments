@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotter Login/Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <!-- <script src="{% static 'js/script.js' %}"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+    
+            $('#register').on('click', function(){
+                $('.register').siblings().hide();
+                $('.register').slideToggle();
+            });
+            
+            
+            $('#login').on('click', function(){
+                $('.login').siblings().hide();
+                $('.login').slideToggle();
+            });
+            
+            
+            $('#reset').on('click', function(){
+                $('.reset').siblings().hide();
+                $('.reset').slideToggle();
+            });
+            });
+    
+    </script>
+</head>
+<body>
+	<div>
+		<header>
+			<div id="spotterimg">
+				<p>SPOTTER</p>
+			</div>
+			{% if messages %}
+                    {% for message in messages%}
+                        <p style="color: red;">**{{message}}**</p>
+                    {% endfor %}
+                {% endif %}
+		</header>
+	</div>
+	<div id="spotterimg">
+		<p>SPOTTER</p>
+	</div>
+    <div class="container">
+		
+		<div class="tabs">
+			<ul>
+				<li id="register"><a>Register</a></li>
+				<li id="login"><a>Login</a></li>
+				<!-- <li id="reset"><a>Reset</a></li> -->
+			</ul>
+		</div>
+		<div class="forms">
+			<div class="register">
+				<p>Sign up for free</p>
+				
+				<form method="POST" name="register" action="/register_new_user">
+					{% csrf_token %}						 
+					<input class="field" name="fname" required type="text" placeholder="First Name" /> 
+					<input class="field" name="lname" required type="text" placeholder="Last Name" /> 
+					<input class="field" name="location" required type="text" placeholder="City, State" /> 
+					<input class="field" name="uname" required type="text" placeholder="Username" /> 
+					<input class="field" name="email" required type="email" placeholder="myusername@domain.com" /> 
+					<input id="p1" class="field" name="password" required type="password" placeholder="Password" onchange="form1.p2.pattern=this.value;" />
+					<input id="p2" class="field" name="confirm_password" required type="password" placeholder="Rewrite Password" required />
+					<input type="submit" onclick="checkpass()" value="Sign Up" />
+				</form>
+			</div>
+			
+			<div class="login">
+				<p>Login to your account.</p>
+				
+				<form method="POST" name="login" action="/login">
+					{% csrf_token %}
+					<input class="field" name="email" required type="email" placeholder="* myusername@domain.com" />
+					<input class="field" name="password" required type="password" name="password" placeholder="Password" />
+					<input type="checkbox" name="terms"> <em>Keep me logged in </em> <input type="submit" value="Login" />
+				</form>
+			</div>
+			
+			<!-- <div class="reset">
+				<p>Reset Your Password.</p>
+				
+				<form method="post" name="register" action="reset.jsp">			 
+					<input class="field" name="email" type="email" placeholder="*myusername@domain.com" required />
+					<input class="field" name="pass_old" type="password" placeholder="*Old Password" required/>
+					<input class="field" name="pass_new" type="password" placeholder="*New Password" required/>
+					<div class="btn">
+						<input type="submit" value="Get New One !" />
+							</div>
+						</form>
+			</div> -->
+		</div>
+	</div>
+</body>
+</html>

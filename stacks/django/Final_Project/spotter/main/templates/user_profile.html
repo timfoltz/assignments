@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/user_style.css' %}">
+    <!-- <script src="{% static 'js/user_script.js' %}"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+    $(".section").not(":first").hide();
+    $("ul#menu li:first").addClass("active").show(); 
+
+    $("ul#menu li").click(function() {
+        $("ul#menu li.active").removeClass("active");
+        $(this).addClass("active");
+        $(".section").slideUp();       
+        $($('a',this).attr("href")).slideDown('slow');
+
+        return false;
+    });
+
+});
+    </script>
+</head>
+<body>
+	<div>
+		<a style="color: black;" href="/dashboard">Dashboard</a>
+        <a style="color: black;" href="/logout">Logout</a></header>
+    </div>
+    <div id="spotterimg">
+		<h1>
+            SPOTTER
+        </h1>
+	</div>
+    <div id="mainwrap">
+        <header>
+        <h1>{{user.fname}}</h1>
+        <!-- <h2>Web Developer from Medford</h2> -->
+        <ul id="menu">
+            <li><a class="profile" href="#profile" title="profile">Profile</a></li>
+            <li><a class="myWorkouts" href="#myWorkouts" title="myWorkouts">My Workouts</a></li>
+            <li><a class="edit" href="#editProfile" title="edit">Edit Profile</a></li>
+            <li><a class="addWorkout" href="#addWorkout" title="workout">Add Workout</a></li>
+            <li><a class="findWorkouts" href="#findWorkouts" title="findWorkouts">Find a Workout</a></li>
+        </ul>
+        </header>
+        <div style="clear:both"></div>
+        <div id="content">
+        <div id="profile" class="section">
+            <div class="column col3">
+            <img style="width: 300px;" src="{{user.photo}}" alt="User's Photo">
+            <table id="bioinfo">
+                <tbody>
+                <tr>
+                    <td class="odd">Username</td>
+                    <td class="even">{{user.user_name}}</td>
+                </tr>
+                <tr>
+                    <td class="odd">Name</td>
+                    <td class="even">{{user.fname}} {{user.lname}}</td>
+                </tr>
+                
+                </tbody>
+            </table>
+            </div>
+            <div class="column col5 pl-50">
+            <h2>About me</h2>
+            <p>{{user.bio}}</p>
+			<h2>My workouts</h2>
+			{% for workout in user.workouts.all %}
+			<p>{{workout.name}}   | Description:   {{workout.about}}</p>
+			{% endfor %}
+			<table>
+				<th>
+					<tr>
+						<td>Gym Name:</td>
+						<!-- <td>location</td> -->
+					</tr>
+				</th>
+				{% for gym in user.gyms.all %}
+				<tr>
+					<td><a href="/gym_info/{{gym.id}}">{{gym.name}}</a></td>
+					<td>{{gym.location}}</td>
+                </tr>
+				{% endfor %}
+			</table>
+            </div>
+        </div>
+        <div id="myWorkouts" class="section">
+            <div class="column ">
+            <table id="workoutInfo">
+				<tr>
+                    <th>Name</th>
+                    <th>Muscle Group</th>
+                    <th>Description</th>
+                    <th>actions</th>
+                </tr>
+                {% for workout in my_workout %}
+                <tr>
+                    <td><p>{{workout.name}}</p></td>
+                    <td>{{workout.muscle_group}}</td>
+                    <td>{{workout.about}}</td>
+                    <td><a href="/delete_workout/{{workout.id}}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+            
+        </div>
+        <div id="editProfile" class="section">
+			<form action="/process_user_edit/{{user.id}}" method="POST">
+				{% csrf_token %}
+                <label for="fname">First Name</label><br>
+                <input type="text" name="fname" value={{user.fname}}><br>
+                <label for="lname">Last Name</label><br>
+                <input type="text" name="lname" value={{user.lname}}><br>
+                <label for="skill" name="skill">Skill</label><br>
+                <input type="text" name="skill" value={{user.skill}}><br>
+                <label for="location" name="location">Location:</label><br>
+                <input type="text" name="location" value={{user.location}}><br>
+                <label for="bio" name="bio">Bio:</label><br>
+                <textarea required id="bio" class="field" name="bio" required type="textarea" cols="30" rows="10">{{user.bio}}</textarea>
+                <br>
+                <label for="photo" name="photo">Photo URL:</label><br>
+                <input type="text" name="photo" value={{user.photo}}><br>
+                <button>Submit</button>
+            </form>
+		</div>
+		<div id="addWorkout" class="section">
+			<form action="/process_workout" method="POST">
+				{% csrf_token %}
+                <label for="name">Name</label><br>
+                <input type="text" name="name"><br>
+                <label for="muscle_group">Muscle Group</label><br>
+                <input type="text" name="muscle_group"><br>
+                <label for="about" name="about">Describe this workout</label><br>
+				<textarea required id="about" class="field" name="about" required type="textarea" placeholder="Exercise : Reps : Weight" cols="30" rows="10"></textarea>
+                <input type="hidden" name="created_by" value="{{user.id}}">
+                <div>
+					<button>Submit</button>
+				</div>
+			</form>
+		</div>
+		<div id="findWorkouts" class="section">
+			<div class="column ">
+			<table id="findWorkouts">
+				<tr>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Muscle Group</th>
+                    <th>Description</th>
+                    <th>Likes</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    {% for workout in workout.all %}
+                    <td><a href="/user_profile/{{workout.created_by.id}}#myWorkouts">{{workout.created_by.user_name}}</a></td>
+                    <td>{{workout.name}}</td>
+                    <td>{{workout.muscle_group}}</td>
+                    <td>{{workout.about}}</td>
+                    <td>{{workout.liked_by.all|length}}</td>
+                    <td><a href="/workout_like/{{workout.id}}">Like</a></td>
+                </tr>
+                {% endfor %}
+			</table>
+				</div>
+				
+		</div>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+.{
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    background-image: url(https://2.bp.blogspot.com/-rU5JqR8YylA/XAAOggsjoUI/AAAAAAAAWWU/7lbpL3qVeg08d-YIl7_M2lZdy2yMUx_zwCLcBGAs/s1600/stephane%2Bbaton.jpg);
+}
+
+h1 {
+    background-color: lightslategray;
+    border-radius: 5px;
+    width: max-content;
+    padding: 3px;
+    border: 1px solid;
+}
+h4 {
+    background-color: lightslategray;
+    border-radius: 5px;
+    width: max-content;
+    padding: 3px;
+    border: 1px solid;
+}
+
+#gold {
+    margin: 20px;
+    
+}
+.gold {
+    border: 4px solid black;
+    font-size: 20px;
+    display: inline;
+    padding: 5px;
+    text-align: center;
+    background-color: lightslategray;
+    border-radius: 5px;
+}
+.activities {
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+div .maker {
+    border: 1px solid black;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+    background-color: lightslategray;
+    border-radius: 5px;
+}
+h3{
+    font-size: 40px;
+}
+
+.activeLog h4 {
+    border-radius: 5px;
+    background-color: lightslategray;
+    width: min-content;
+    border: 1px solid;
+    padding: 2px;
+}
+
+
+.logger {
+    overflow-y: scroll;
+    height: 175px;
+    width: inherit;
+    background-color: lightslategray;
+    font-size: 13px;
+    padding-left: 15px;
+}
+/* .div_before_table {
+    overflow:hidden;
+    overflow-y: scroll;
+    height: 500px;
+} */

@@ -1,0 +1,81 @@
+(django_env) C:\Users\timot\coding_dojo\stacks\django\projects\orm\single_model_orm>python manage.py shell
+Python 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from users_app.models import users
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ImportError: cannot import name 'users' from 'users_app.models' (C:\Users\timot\coding_dojo\stacks\django\projects\orm\single_model_orm\users_app\models.py)
+>>> from users_app.models import user
+>>> user.objects.create(first_name="Frank", last_name="Beans", email_address="frankandbeans@hormel.yum", age="45")
+<user: user object (1)>
+>>> user.objects.create(first_name="Tinker", last_name="Bell", email_address="tink@ring.com", age="365")
+<user: user object (2)>
+>>> user.objects.create(first_name="Fred", last_name="Flintstone", email_address="fflintstone@bedrock.dirt", age="2000000")
+<user: user object (3)>
+**************************************************************************************************************************
+
+>>> from users_app.models import user
+>>> user.objects.all()
+<QuerySet [<User | ID: 1 | First: Frank | Last: Beans>, <User | ID: 2 | First: Tinker | Last: Bell>, <User | ID: 3 | First: Fred | Last: Flintstone>]>
+*****************************************************************************************************************
+>>> user.objects.last()
+<User | ID: 3 | First: Fred | Last: Flintstone>
+>>>
+***********************************************************************
+>> user.objects.first()
+<User | ID: 1 | First: Frank | Last: Beans>
+>>>
+***************************************************************************
+<User | ID: 3 | First: Fred | Last: Flintstone>
+>>> c=user.objects.get(id=3)
+>>> c.last_name="Pancakes"
+>>> c
+<User | ID: 3 | First: Fred | Last: Pancakes>
+*******************************************************************************
+>>> u2
+<User | ID: 2 | First: Tinker | Last: Bell>
+>>> u2.delete()
+(1, {'users_app.user': 1})
+>>> u2.save()
+>>> user.objects.all()
+<QuerySet [<User | ID: 1 | First: Frank | Last: Beans>, <User | ID: 3 | First: Fred | Last: Pancakes>, <User | ID: 4 | First: Tinker | Last: Bell>]>
+>>> u2=user.objects.get(id=4)
+>>> u2
+<User | ID: 4 | First: Tinker | Last: Bell>
+>>> u2.delete()
+(1, {'users_app.user': 1})
+>>> user.objects.all()(
+... user.objects.all()
+... user.objects.all()()
+  File "<console>", line 3
+    user.objects.all()()
+    ^
+SyntaxError: invalid syntax
+>>> user.objects.all()
+<QuerySet [<User | ID: 1 | First: Frank | Last: Beans>, <User | ID: 3 | First: Fred | Last: Pancakes>]>
+>>>
+******************************************************************************************************
+>>> user.objects.all().order_by("first_name")
+<QuerySet [<User | ID: 1 | First: Frank | Last: Beans>, <User | ID: 3 | First: Fred | Last: Pancakes>]>
+>>> user.objects.create(first_name="Tinker", last_name="Bell", email_address="tink@ring.com", age="365")
+<User | ID: 5 | First: Tinker | Last: Bell>
+>>> user.objects.all().order_by("first_name")
+<QuerySet [<User | ID: 1 | First: Frank | Last: Beans>, <User | ID: 3 | First: Fred | Last: Pancakes>, <User | ID: 5 | First: Tinker | Last: Bell>]>
+>>> user.objects.all().order_by("last_name")
+<QuerySet [<User | ID: 1 | First: Frank | Last: Beans>, <User | ID: 5 | First: Tinker | Last: Bell>, <User | ID: 3 | First: Fred | Last: Pancakes>]>
+>>>
+******************************************************************
+>>> user.objects.all().order_by("first_name")
+<QuerySet [<User | ID: 1 | First: Frank | Last: Beans>, <User | ID: 3 | First: Fred | Last: Pancakes>]>
+>>> user.objects.create(first_name="Tinker", last_name="Bell", email_address="tink@ring.com", age="365")
+<User | ID: 5 | First: Tinker | Last: Bell>
+>>> user.objects.all().order_by("first_name")
+<QuerySet [<User | ID: 1 | First: Frank | Last: Beans>, <User | ID: 3 | First: Fred | Last: Pancakes>, <User | ID: 5 | First: Tinker | Last: Bell>]>
+>>> user.objects.all().order_by("last_name")
+<QuerySet [<User | ID: 1 | First: Frank | Last: Beans>, <User | ID: 5 | First: Tinker | Last: Bell>, <User | ID: 3 | First: Fred | Last: Pancakes>]>
+>>> user.objects.all().order_by("-last_name")
+<QuerySet [<User | ID: 3 | First: Fred | Last: Pancakes>, <User | ID: 5 | First: Tinker | Last: Bell>, <User | ID: 1 | First: Frank | Last: Beans>]>
+>>>
+**********************************************************************
+

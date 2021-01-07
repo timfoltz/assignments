@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User Profile</title>
+	{% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+	<header class="navbar">
+		<div id="spotterimg">
+			<h1>
+				SPOTTER
+			</h1>
+		</div>
+	</header>
+    <div>
+        <a style="color: black;" href="/logout">Logout</a></header>
+	</div>
+	<div class="container">
+		<div class="colomn">
+			<div class="subDiv">
+			<div class="box">
+			<h3>My Profile</h3>
+			<button><a href="/user_profile/{{user.id}}"><img src="https://static1.squarespace.com/static/5750d5129f72662d66448028/587c5777ebbd1ab22e094137/58ad33ae9de4bb4776396ef0/1576644363402/Bench+Press+3.jpg?format=1500w" alt="dumbell" class="dashboardIMG"></a></button>
+			</div>
+			
+			<div class="box">
+			<h3>Find a Spotter</h3>
+			<button><a href="/spotter"><img src="https://www.energwellness.com/wp-content/uploads/2015/11/shutterstock_266711579.jpg" alt="spotter" class="dashboardIMG"></a></button>
+            </div>
+            
+			<div class="box">
+			<h3>Join a Spotter</h3>
+			<button><a href="/spotter"><img src="https://cdn.nybooks.com/wp-content/uploads/2014/04/Times-Square-Gym-Interior.jpg" alt="spotter" class="dashboardIMG"></a></button>
+			</div>
+			
+			<div class="box">
+			<h3>Create Workout</h3>
+			<button><a href="/user_profile/{{user.id}}"><img src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/blog_posts/webmd-doctors/1800x1200_empty-gym.jpg?resize=*:350px" alt="" class="dashboardIMG"></a></button>
+			</div>
+			</div>
+			<div class="subDiv">
+			<div class="box">
+			<h3>Find Workout</h3>
+			<button><a href="/user_profile/{{user.id}}"><img src="https://setsinthecity.co.uk/wp-content/uploads/2018/08/box-gym-black-white-e1467172664386.jpg" alt="" class="dashboardIMG"></a></button>
+			</div>
+
+			<div class="box">
+			<h3>Find Personal Trainer</h3>
+			<button><a href="/find_peronsal_trainer>"><img src="https://img1.goodfon.com/wallpaper/nbig/7/84/metal-black-and-white-gym.jpg" alt="" class="dashboardIMG"></a></button>
+            </div>
+            
+			<div class="box">
+			<h3>Find Gym</h3>
+            <button><a href="/find_gym"><img src="https://freedesignfile.com/upload/2017/04/Fitness-room-black-and-white-photo-Stock-Photo.jpg" alt="" class="dashboardIMG"></a></button>
+            </div>
+            
+			<div class="box">
+			<h3>Keep Track</h3>
+            <button><a href="/tracker/{{user.id}}"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQRmFu_qELQeET963_v0KbYFTx7ne_NF0kLg&usqp=CAU" alt="" class="dashboardIMG"></a></button>
+            </div>
+		</div>
+        </div>
+	</div>
+
+</body>
+</html>

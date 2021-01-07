@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register or login</title>
+</head>
+<body>
+    <div style="display: flex;">
+        <div>
+            {%for message in messages%}
+            <p style="color: red;">**{{message}}**</p>
+            {% endfor %}
+            <h1>Registration</h1>
+            <form action="/register" method="POST" id="register">
+                {%csrf_token%}
+                <label for="fname" id="fname">First Name</label>
+                    <input name="fname" id="fname" type="text"> <br>
+                
+                <label for="lname" id="lname">Last Name</label>
+                    <input name="lname" id="lname" type="text"> <br>
+                    
+                <!-- <label for="birthday" id="birthday">Birthday</label>
+                    <input name="birthday" id="birthday" type="date"> <br> -->
+
+                <label for="email" id="email">Email</label>
+                    <input name="email" id="email" type="email"> <br>
+                
+                <label for="password" id="password">Password</label>
+                    <input name="password" id="password" type="password"> <br>
+                
+                <label for="confirm" id="confirm">Confirm Password</label>
+                    <input name="confirm" id="confirm" type="password"> <br>
+                
+                <button>Register</button>
+            
+            </form>
+        </div>
+        <div>
+            <h1>Login</h1>
+                <form action="/login" id="login" method="POST">
+                    {%csrf_token%}
+                    <label for="email" id="email">Email</label>
+                <input name="email" id="email" type="email"> <br>
+                
+                <label for="password" id="password">Password</label>
+                    <input name="password" id="password" type="password"> <br>
+                
+                <button>Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

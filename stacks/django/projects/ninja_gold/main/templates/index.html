@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%load static%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheetcopy" href="{% static 'css/style.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div>
+        <h1>Welcome to the Ninja Gold game</h1>
+    </div>
+    <div>
+        <h4>Your Gold:</h4>
+    </div>
+    <div id="gold">
+        <p class="gold">{{request.session.gold_stash}}</p>
+    </div>
+    <div class="activities">
+        <div class="maker farming">
+            <h3>Farm</h3>
+            <p>(earns 10-20 gold)</p>
+            <form action="/process_money" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="location" value="farm">
+                <button class="btn" >Find Gold!</button>
+            </form>
+        </div>
+        <div class="maker cave">
+            <h3>Cave</h3>
+            <p>(earns 5-10 gold)</p>
+            <form action="/process_money" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="location" value="cave">
+                <button class="btn" >Find Gold!</button>
+            </form>
+        </div>
+        <div class="maker house">
+            <h3>House</h3>
+            <p>(earns 2-5 gold)</p>
+            <form action="/process_money" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="location" value="house">
+                <button class="btn" >Find Gold!</button>
+            </form>
+        </div>
+        <div class="maker casino">
+            <h3>Casino</h3>
+            <p>(earns or looses 0-50 gold</p>
+            <form action="/process_money" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="location" value="casino">
+                <button class="btn" >Find Gold!</button>
+            </form>
+        </div>
+    </div>
+    <div class="activeLog">
+        <h4>Activities:</h4>
+        <div class="logger">
+            {% for stuff in activities_log%}
+                <p>{{stuff}}</p>
+            {%endfor%}
+        </div>
+    </div>
+    <div>
+        <a href="/reset"> Reset</a>
+    </div>
+</body>
+</html>

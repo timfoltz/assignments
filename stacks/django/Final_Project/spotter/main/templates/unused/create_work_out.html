@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Profile</title>
+	{% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+<form action="/process_workout" method="post">
+	<label for="name">name</label>
+	<input type="text" name="name">
+	<label for="muscle_group">muscle_group</label>
+	<input type="text" name="muscle_group">
+	<label for="about">Workout Routine</label>
+	<textarea name="about" id="" cols="30" rows="10" style="height: 800px; width: 600px;"></textarea>
+
+
+
+
+
+
+</form>
+</html>

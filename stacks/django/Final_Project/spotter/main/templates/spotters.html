@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/spotter.css' %}">
+    <!-- <script src="{% static 'js/user_script.js' %}"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+    $(".section").not(":first").hide();
+    $("ul#menu li:first").addClass("active").show(); 
+
+    $("ul#menu li").click(function() {
+        $("ul#menu li.active").removeClass("active");
+        $(this).addClass("active");
+        $(".section").slideUp();       
+        $($('a',this).attr("href")).slideDown('slow');
+
+        return false;
+    });
+
+});
+    </script>
+</head>
+<body>
+	<div>
+		<a style="color: black;" href="/dashboard">Dashboard</a>
+        <a style="color: black;" href="/logout">Logout</a></header>
+    </div>
+    <div id="spotterimg">
+		<h1>
+            SPOTTER
+        </h1>
+	</div>
+    <div id="mainwrap">
+        <header>
+        <h1>{{user.fname}}</h1>
+        <!-- <h2>Web Developer from Medford</h2> -->
+        <ul id="menu">
+            <li><a class="joinSpotter" href="#joinSpotter" title="joinSpotter">Join a Spotter</a></li>
+            <li><a class="findSpotter" href="#findSpotter" title="findSpotter">Find a Spotter</a></li>
+        </header>
+        <div style="clear:both"></div>
+        <div id="content">
+        <div id="joinSpotter" class="section">
+            <div class="column">
+				<table>
+                    <tr>
+                        <th>Username</th>
+                        <th>Gym</th>
+                        <th>Location</th>
+                        <th>Muscle group</th>
+                        <th id="exercise">Exercise</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                        <th>Joining</th>
+					</tr>
+                    {% for spotter in all_spotters %}
+						<tr>
+                            <td>{{spotter.created_by.user_name}}</td>
+                            <td>{{spotter.gym.name}}</td>
+                            <td>{{spotter.gym.location}}</td>
+                            <td>{{spotter.muscle_group}}</td>
+                            <td>{{spotter.about}}</td>
+                            <td>{{spotter.workout_date}}</td>
+                            <td><a href="/join_spotter/{{spotter.id}}">join</a></td>
+                            {% for spotters in spotter.user_name.all %}
+                            <td>{{spotters.user_name}}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+				</table>
+    
+            </div>
+        </div>
+        <div id="findSpotter" class="section">
+			<form action="/process_spotter" method="post">
+				{% csrf_token %}
+                <label for="gym">What Gym</label><br>
+                <select name="gym" id="gym"><br>
+                    {% for gym in all_gyms %}
+                    <option value="{{gym.id}}">{{gym.name}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <!-- <label for="location">Location</label><br>
+                <input type="text" name="location" id="location"><br> -->
+				<label for="skill">Skill Level</label><br>
+				<select name="skill" id="skill">
+					<option value="Beginner">Beginner</option>
+					<option value="Intermediate">Intermediate</option>
+					<option value="Advanced">Advanced</option>
+				</select><br>
+				<label for="muscle_group">What are you working out?</label><br>
+				<input type="text" name="muscle_group"><br>
+				<label for="date">What day?</label><br>
+				<input type="date" name="date"><br>
+				<label for="about">What exercises?</label><br>
+                <textarea id="about" class="field" name="about" required type="textarea" placeholder="" cols="30" rows="10"></textarea>
+                <br>
+				<button>Submit</button>
+            </form>
+		</div>
+				
+		</div>
+    </body>
+</html>

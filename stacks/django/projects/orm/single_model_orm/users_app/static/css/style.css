@@ -1,0 +1,27 @@
+table tr th {
+    justify-items: center;
+}
+
+
+table {
+    height: 100px;
+    width: inherit;
+    font-size: 13px;
+    padding-left: 15px;
+   
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.name {
+    word-spacing: 5px;
+}
+.table {
+    display: grid;
+}
+
+form {
+    justify-content: space-evenly;
+    display: flex;
+    flex-wrap: wrap;
+}

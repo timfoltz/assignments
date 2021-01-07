@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>journal</title>
+	{% load static %}
+    <link rel="stylesheet" href="{% static 'css/tracker.css' %}">
+</head>
+<body>
+	<form action="/process_jornal" method="post">
+	<div class="paper">
+		<div class="lines">
+		<div class="text" contenteditable spellcheck="false">
+			Log your Workouts<br /><br />
+			12/23/2020
+			Bench Press 12reps 225lbs, 10reps 15lbs
+		</div>
+		</div>
+		<div class="holes hole-top"></div>
+		<div class="holes hole-middle"></div>
+		<div class="holes hole-bottom"></div>
+	</div>
+	</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

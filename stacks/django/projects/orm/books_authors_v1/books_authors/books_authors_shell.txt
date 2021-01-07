@@ -1,0 +1,152 @@
+(django_env) C:\Users\timot\coding_dojo\stacks\django\projects\orm\books_authors>py manage.py shell
+Python 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from models.Model import Book, Author
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ModuleNotFoundError: No module named 'models'
+>>> from main.models import Book, Author
+>>> Book.objects.create(title="C Sharp)
+  File "<console>", line 1
+    Book.objects.create(title="C Sharp)
+                                       ^
+SyntaxError: EOL while scanning string literal
+>>> Book.objects.create(title="C Sharp")
+<Book: Book object (1)>
+>>> Book.objects.createP](title="Java")
+  File "<console>", line 1
+    Book.objects.createP](title="Java")
+                        ^
+SyntaxError: unmatched ']'
+>>> Book.objects.create(title="Java")
+<Book: Book object (2)>
+>>> Book.objects.create(title="Python")
+<Book: Book object (3)>
+>>> Book.objects.create(title="PHP")
+<Book: Book object (4)>
+>>> Book.objects.create(title="Ruby")
+<Book: Book object (5)>
+>>> Author.objects.create(fname="Jane", lname="Austen")
+<Author: Author object (1)>
+>>> Author.objects.create(fname="Emily", lname="Dickinson")
+<Author: Author object (2)>
+>>> Author.objects.create(fname="Fydor", lname="Dostoevesky")
+<Author: Author object (3)>
+>>> Author.objects.create(fname="William", lname="Shakesspeare")
+<Author: Author object (4)>
+>>> Author.objects.create(fname="Lau", lname="Tzu")
+<Author: Author object (5)>
+>>>
+********************************************
+(django_env) C:\Users\timot\coding_dojo\stacks\django\projects\orm\books_authors>py manage.py shell
+Python 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from main.models improt Book, Author
+  File "<console>", line 1
+    from main.models improt Book, Author
+                     ^
+SyntaxError: invalid syntax
+>>> from main.models import Book, Author
+>>> Book.objects.get(id=1)
+<Book: Book object (1)>
+>>> book1=Book.objects.get(id=1)
+>>> book1.name
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Book' object has no attribute 'name'
+>>> book1.title
+'C Sharp'
+>>> book1.title = "C#"
+>>> book1.title
+'C#'
+>>> author4 = Author.objects.get(id=4)
+>>> author4.fname
+'William'
+>>> author4.fname = "Bill"
+>>> book1.save()
+>>> book1.title
+'C#'
+>>> author4.save()
+>>> book2 = Book.objects.get(id=2)
+>>> book = Book.objects.get(id=)
+  File "<console>", line 1
+    book = Book.objects.get(id=)
+                            ^
+SyntaxError: expression cannot contain assignment, perhaps you meant "=="?
+>>> book3 = Book.objects.get(id=3)
+>>> book4 = Book.objects.get(id=4)
+>>> book5 = Book.objects.get(id=5)
+>>> author = Author.objects.get(id=)
+  File "<console>", line 1
+    author = Author.objects.get(id=)
+                                ^
+SyntaxError: expression cannot contain assignment, perhaps you meant "=="?
+>>> author1 = Author.objects.get(id=1)
+>>> author2 = Author.objects.get(id=2)
+>>> author3 = Author.objects.get(id=3)
+>>> author5 = Author.objects.get(id=5)
+>>> author2.book.add(book1, book2)
+>>> author2.book.title
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'ManyRelatedManager' object has no attribute 'title'
+>>> book2.author.fname
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Book' object has no attribute 'author'
+>>> book2.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Book' object has no attribute 'all'
+>>> book2
+<Book: Book object (2)>
+>>> book2.title
+'Java'
+>>> book2.authors
+<django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager object at 0x000001B1F8586EB0>
+>>> book2.authors.fname
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'ManyRelatedManager' object has no attribute 'fname'
+>>> book2.authors.name
+>>> book2.authors.book
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'ManyRelatedManager' object has no attribute 'book'
+>>> author3.book.add(book1, book2, book3)
+>>> author3.book.add(book4)
+>>> author2.book.add(book3)
+>>> author1.book.add(book1, book2)
+>>> author4.book.add(book1, book2, book3, book4, book5)
+>>> book3.objects.authors
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\timot\coding_dojo\my_env\django_env\lib\site-packages\django\db\models\manager.py", line 176, in __get__
+    raise AttributeError("Manager isn't accessible via %s instances" % cls.__name__)
+AttributeError: Manager isn't accessible via Book instances
+>>> book3.authors
+<django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager object at 0x000001B1F8586AC0>
+>>> book3.authors.fname
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'ManyRelatedManager' object has no attribute 'fname'
+>>> book3.authors.all()
+<QuerySet [<Author: Author object (3)>, <Author: Author object (2)>, <Author: Author object (4)>]>
+>>> book3.authors.all()
+<QuerySet [<Author: Author object (3)>, <Author: Author object (2)>, <Author: Author object (4)>]>
+>>> book3.authors.remove(author3)
+>>> book3.authors.all()
+<QuerySet [<Author: Author object (2)>, <Author: Author object (4)>]>
+>>> book2.authors.add(author5)
+>>> book2.authors.all()
+<QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (1)>, <Author: Author object (4)>, <Author: Author object (5)>]>
+>>> author3.books.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Author' object has no attribute 'books'
+>>> author3.book.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (4)>]>
+>>> book5.authors.all()
+<QuerySet [<Author: Author object (4)>]>

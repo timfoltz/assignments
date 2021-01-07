@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div>
+        <h1>Hello</h1>
+    </div>
+    <div class="table">
+        <table>
+            <div class="table headers">
+                <tr>
+                <th>Key</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                </tr>
+            </div>
+            {% for user in user_model %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td class="name">{{user.first_name}} {{user.last_name}}</td>
+                <td>{{user.email_address}}</td>
+                <td>{{user.age}}</td>
+            </tr>{%endfor%}
+        </table>
+    </div>
+    <div class="form">
+        <form action="/process" method="POST">
+            {%csrf_token%}
+            <p>First Name<input name="first_name" type="text"></p>
+            <p>Last Name<input name="last_name" type="text"></p>
+            <p>Email Address<input name="email_address" type="text"></p>
+            <p>Age<input name="age" type="text"></p>
+            <button>Submit</button>
+        </form>
+    </div>
+</body>
+</html>

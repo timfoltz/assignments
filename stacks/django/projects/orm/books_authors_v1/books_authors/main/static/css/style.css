@@ -1,0 +1,16 @@
+.main_div{
+    display: flex;
+}
+#add_book_form{
+    display: grid;
+}
+#add_author_form{
+    display: grid;
+}
+table
+.table_head{
+    background-color: grey;
+}
+tr:nth-child(even) {
+    background-color: lightgrey;
+}

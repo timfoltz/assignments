@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{book.title}}</title>
+</head>
+<body>
+    <header><a href="/dashboard">Home</a> | <a href="/logout">Logout</a> </header>
+    <div>
+        <h1>{{book.title}}</h1>
+        <h3>Author: {{book.author.fname}} {{book.author.lname}}</h3>
+    </div>
+    <div>
+        <h2>Reviews:</h2>
+        {% for reviews in book.reviews.all %}
+        <p><a href="/users/{{reviews.reviewer.id}}">{{reviews.reviewer.fname}} {{reviews.reviewer.lname}}</a>{{reviews.content}}</p>
+        <a href="/delete_review/{{reviews.id}}">Delete Review</a>
+        {% endfor %}
+    </div>
+    <div>
+        <form action="/add_review" method="POST">
+            {%csrf_token%}
+            <input type="hidden" name="book" value="{{book.id}}">
+            <label for="review">Review:</label><br>
+                <textarea name="review" id="review" cols="60" rows="10"></textarea>
+                    <br>
+                    <label for="rating">Rating</label>
+                    <select name="rating" id="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+            <button>Submit Review</button>
+        </form>
+    </div>
+</body>
+</html>

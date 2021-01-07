@@ -1,0 +1,96 @@
+(django_env) C:\Users\timot\coding_dojo\stacks\django\projects\orm\dojo_ninjas>py manage.py shell
+Python 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from main import Dojo, Ninja
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ImportError: cannot import name 'Dojo' from 'main' (C:\Users\timot\coding_dojo\stacks\django\projects\orm\dojo_ninjas\main\__init__.py)
+>>> from main.models import Dojo, Ninja
+>>>
+*************************
+(django_env) C:\Users\timot\coding_dojo\stacks\django\projects\orm\dojo_ninjas>py manage.py shell
+Python 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from main.models import Dojo, Ninja
+>>> Dojo.objects.create(name="Cobra Kai", city = "Reseda", state = "CA")
+<User | ID: 1 | First: Cobra Kai>
+>>> Dojo.objects.create(name="Miyagi Do", city = "Canoga Park", state = "CA")
+<User | ID: 2 | First: Miyagi Do>
+>>> Dojo.objects.create(name="Fire Bird", city = "Phoenix", state = "AZ")
+<User | ID: 3 | First: Fire Bird>
+>>>
+*****************************************
+>>> d1=Dojo.objects.get(id=1)
+>>> d2=Dojo.objects.get(id=2)
+>>> d3=Dojo.objects.get(id=3)
+>>> d1.delete()
+(1, {'main.Ninja': 0, 'main.Dojo': 1})
+>>> d2.delete()
+(1, {'main.Ninja': 0, 'main.Dojo': 1})
+>>> d3.delete()
+(1, {'main.Ninja': 0, 'main.Dojo': 1})
+>>> Dojo.objects..all()
+****************************************
+>>> Dojo.objects.all()
+<QuerySet []>
+>>> Dojo.objects.create(name="Russo Kai", city="Phoenix", state="AZ")
+<User | ID: 4 | First: Russo Kai>
+>>> Dojo.objects.create(name="Jonny Do", city="Reseda", state="CA")
+<User | ID: 5 | First: Jonny Do>
+>>> Dojo.objects.create(name="Mickey's", city="Kissame", state="FL")
+<User | ID: 6 | First: Mickey's>
+>>>
+*******************************************
+>>> mickey.ninjas.all()
+<QuerySet [<User | ID: 7 |Minnie |Mouse  |Dojo object (6)>, <User | ID: 8 |Donald |Duck  |Dojo object (6)>, <User | ID: 9 |Pluto |Dog  |Dojo object (6)>]>
+>>>
+************************************
+>>> Dojo.objects.first()
+<User | ID: 4 | First: Russo Kai>
+>>> russo.ninjas.all()
+<QuerySet [<User | ID: 1 |Cobra |Lawrence  |Dojo object (4)>, <User | ID: 2 |Frank |Beans  |Dojo object (4)>, <User | ID: 3 |Fred |Flintstone  |Dojo object (4)>]>
+>>>
+*****************************************
+>>> Ninja.objects.last()
+<User | ID: 9 |Pluto |Dog  |Dojo object (6)>
+>>> pluto=Ninja.objects.get(id=9)
+>>> pluto.name
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Ninja' object has no attribute 'name'
+>>> pluto.fname
+'Pluto'
+>>> pluto.dojo
+<User | ID: 6 | First: Mickey's>
+>>>
+****************************************
+(django_env) C:\Users\timot\coding_dojo\stacks\django\projects\orm\dojo_ninjas>py manage.py makemigrations
+Migrations for 'main':
+  main\migrations\0003_dojo_desc.py
+    - Add field desc to dojo
+
+(django_env) C:\Users\timot\coding_dojo\stacks\django\projects\orm\dojo_ninjas>py manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, main, sessions
+Running migrations:
+  Applying main.0003_dojo_desc... OK
+
+(django_env) C:\Users\timot\coding_dojo\stacks\django\projects\orm\dojo_ninjas>py manage.py shell
+Python 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from models import Dojo, Ninja
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ModuleNotFoundError: No module named 'models'
+>>> from main.models import Dojo, Ninja
+>>> Dojo.objects.create(name="Harry Potter Dojo", city="Hogwarts", state="WW", desc="Magical world of wanding")
+<User | ID: 7 | First: Harry Potter Dojo>
+>>> harry=Dojo.objects.get(id=7)
+>>> harry.desc
+'Magical world of wanding'
+>>> harry
+<User | ID: 7 | First: Harry Potter Dojo>
+>>>

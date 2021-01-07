@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/gym_style.css' %}">
+    <!-- <script src="{% static 'js/user_script.js' %}"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+    $(".section").not(":first").hide();
+    $("ul#menu li:first").addClass("active").show(); 
+
+    $("ul#menu li").click(function() {
+        $("ul#menu li.active").removeClass("active");
+        $(this).addClass("active");
+        $(".section").slideUp();       
+        $($('a',this).attr("href")).slideDown('slow');
+
+        return false;
+    });
+
+});
+    </script>
+</head>
+<body>
+    <div>
+        <header>
+		<a style="color: black;" href="/dashboard">Dashboard</a>
+        <a style="color: black;" href="/logout">Logout</a>
+        </header>
+        <div id="spotterimg">
+            <h1>
+                SPOTTER
+            </h1>
+        </div>
+	</div>
+    <div id="mainwrap">
+        <header>
+        <h1>Spotter</h1>
+        <ul id="menu">
+            <li><a class="profile" href="#profile" title="profile">Gym Info</a></li>
+            <li><a class="editGym" href="#editGym" title="editGym">Edit Gym</a></li>
+            <li><a class="edit" href="#addGym" title="edit">Add Gym</a></li>
+            <li><a class="joinGym" href="#joinGym" title="joinGym">Find A Gym</a></li>
+        </ul>
+        </header>
+        <div style="clear:both"></div>
+        <div id="content">
+        <div id="profile" class="section">
+            <div class="column col3">
+            <img style="width: 300px;" src="{{gym.photo}}" alt="Gym Photo">
+            <table id="bioinfo">
+                <tbody>
+                <tr>
+                    <td class="odd">Gym</td>
+                    <td class="even">{{gym.name}}</td>
+                </tr>
+                <tr>
+                    <td class="odd">Location</td>
+                    <td class="even">{{gym.location}}</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="column col5 pl-50">
+            <h2>About gym</h2>
+            <p>{{gym.about}}</p>
+            <h2>Spotters at Gym</h2>
+            {% for members in gym.members.all %}
+            <p>{{members.user_name}}</p>
+            {% endfor %}
+            </div>
+        </div>
+        <div id="editGym" class="section">
+			<form action="/process_gym_edit/{{gym.id}}" method="POST">
+				{% csrf_token %}
+                <label for="name">Name</label><br>
+                <input type="text" name="name" value="{{gym.name}}"><br>
+                <label for="location" name="location">Gym Name:</label><br>
+                <input type="text" name="location" value="{{gym.location}}"><br>
+                <label for="about" name="about">About:</label><br>
+                <textarea required id="about" class="field" name="about" required type="textarea"  cols="30" rows="10">{{gym.about}}</textarea>
+                <br>
+                <label for="photo" name="photo">Photo URL:</label><br>
+                <input type="text" name="photo" value={{gym.photo}}><br>
+                <button>Submit</button>
+            </form>
+		</div>
+        <div id="addGym" class="section">
+			<form action="/process_add_gym" method="POST">
+				{% csrf_token %}
+                <form method="POST" name="register_gym" action="/process_add_gym">	
+                    {% csrf_token %}
+					<input required class="field" name="name" required type="text" placeholder="Gym Name" /> 
+					<input required class="field" name="location" required type="text" placeholder="Your City, State" /> 
+                    <textarea required id="about" class="field" name="about" required type="textarea" placeholder="Amenities, Hours, Equipment...etc" cols="30" rows="10"></textarea>
+                    <input type="text" name="photo" placeholder="Photo URL">
+                    <div>
+                <button>Submit</button>
+                </div>
+            </form>
+		</div>
+        <div id="joinGym" class="section">
+			<div class="column ">
+			<table id="joinGym">
+				<tr>
+					<th>Photo</th>
+					<th>Name</th>
+					<th>Location</th>
+					<th>Total Members</th>
+				</div>
+					<div class="column ">
+					<th id="gymDescription">About this Gym</th>
+					<th>actions</th>
+				</div>
+				</tr>
+				<div>
+				{% for gym in all_gyms.all %}
+					<tr>
+						<td><img style="width: 200px;" src="{{gym.photo}}" alt="Gym Photo"></td>
+						<td><p>{{gym.name}}</p></td>
+						<td>{{gym.location}}</td>
+						<td>{{gym.members|length}}</td>
+						<td>{{gym.about}}</td>
+						<td><a href="/join_gym/{{gym.id}}">Join</a> | <a href="/gym_info/{{gym.id}}">Gym Info</a></td>
+					</tr>
+					{% endfor %}
+			</table>
+				</div>
+				
+        </div>    </div>
+</body>
+</html>

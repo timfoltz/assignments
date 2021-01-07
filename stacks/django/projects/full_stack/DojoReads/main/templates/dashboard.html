@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.fname}}'s Dashboard</title>
+</head>
+<body>
+    <div>
+        <div>
+            <header style="display: flex; justify-content: space-between;">
+                
+                <h1>Welcome {{user.fname}}</h1>
+                <p><a href="/add_new">Add Book and Review</a>  |  <a href="/logout"> Log Out</a></p>
+            </header>
+            <div style="display: flex; justify-content: space-around;">
+                <div>
+                    <h3>Recent Book Reviews</h3>
+                    {% for books in all_books%}
+                        <h2>{{books.title}}</h2>
+                        {% for reviews in books.reviews.all%}
+                            <a href="/users/{{reviews.reviewer.id}}">{{reviews.reviewer.fname}} {{reviews.reviewer.lname}}</a>
+                            <p>{{reviews.content}}</p>
+                        {% endfor %}
+
+                    {% endfor %}
+                </div>
+                
+                <div>
+                    <h3>Other Book with Reviews:</h3>
+                    {% for reviews in all_reviews%}
+                        <p><a href="/books/{{reviews.book.id}}">{{reviews.book.title}}</a></p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

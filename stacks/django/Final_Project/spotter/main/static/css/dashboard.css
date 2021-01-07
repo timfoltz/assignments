@@ -1,0 +1,53 @@
+
+.container{
+	display: flex;
+	justify-content: center;
+	/* background: url('https://res.cloudinary.com/grohealth/image/upload/f_auto,fl_lossy,q_auto/v1583762924/DCUK/Content/iStock-928653036.jpg') fixed; */
+}
+.colomn {
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 50px;
+}
+
+#spotterimg h1 {
+    width: auto;
+    font-family: fantasy;
+    font-size: 96px;
+    color: black;
+    justify-content: center;
+    display: flex;
+    margin: 0px 444px;
+    border: 6px solid;
+}
+
+.box{
+	/* height: 500px; */
+	width: 250px;
+	margin: 5px;
+}
+
+.colomn img {
+	height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.colomn h3{ 
+	text-align: center;
+}
+
+.colomn button{
+	justify-content: center;
+	background-color: black;
+}
+
+.subDiv {
+	display: flex;
+}
+
+body {
+	background: url(https://res.cloudinary.com/grohealth/image/upload/f_auto,fl_lossy,q_auto/v1583762924/DCUK/Content/iStock-928653036.jpg) fixed;
+    background-size: cover;
+}

@@ -1,0 +1,14 @@
+.top {
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 2px solid black;
+}
+.topLeft{
+    text-align: center;
+}
+.topRight{
+    text-align: center;
+}
+.bottom{
+    text-align: center;
+}

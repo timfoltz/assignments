@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.fname}}'s Page</title>
+</head>
+<body>
+    <header><a href="/dashboard">Home</a> | <a href="/logout">Logout</a> | <a href="/add_new">Add Book and Review</a> </header>
+    <div>
+        <h1>User Alias: {{user.fname}}</h1>
+        <h3>Name: {{user.fname}} {{user.lname}}</h3>
+        <h3>Email: {{user.email}}</h3>
+        <h3>total reviews: {{user.reviews_written.all|length}}</h3>
+    </div>
+    <div>
+        <h3>Reviewed these books:</h3>
+        {% for reviews in user.reviews_written.all%}
+        <hr>    
+        <p><a href="/books/{{reviews.book.id}}">{{reviews.book.title}}</a></p>
+        {% endfor %}
+
+        
+    </div>
+</body>
+</html>
