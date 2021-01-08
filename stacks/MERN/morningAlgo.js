@@ -253,9 +253,43 @@ const insertionSortDestructuredSwap = (arr) => {
 
 // bonus challenge: use destructuring for your swap
 
-// ************************************** jan 6 2021 *************************************************
+// ************************************** jan 7 2021 *************************************************
+
+let quickSort = (arr[], low, high) => {
+    if(low < high){
+        let idx = Partition(arr, low, high);
+        quickSort(arr, low, idx - 1);
+        quickSort(arr, idx + 1, high);
+    }
+    return 
+}
+
+let Partition = (arr, left, right) => {
+    let pivot = Math.floor(arr.length / 2)
+    left = 0
+    right = arr.length - 1
+
+    let temp = arr[pivot]
+    arr[pivot] = arr[arr.length-1]
+    arr[arr.length-1] = temp
+
+    for(let i=0; i<pivot; i++){
+        console.log(arr[i])
+        for(let j=arr.length-2; j>pivot; j--){
+            console.log(arr[j])
+            if(arr[i] > arr[j]){
+                let temp2 = arr[i]
+                arr[i] = arr[j]
+                arr[j] = temp2
+            }
+        }
+    }
+}
 
 
+console.log(Partition([5, 3, 2, 7, 1, 4, 6]))
+
+// ************************JAN 8 2021***************************
 
 
 
