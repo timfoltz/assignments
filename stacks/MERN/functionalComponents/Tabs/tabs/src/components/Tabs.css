@@ -1,0 +1,13 @@
+.Div{
+    display:"flex";
+    justify-content:"center"
+}
+
+
+.TabDiv {
+    background-color:"black";
+    height:"30px";
+    width:"100px";
+    margin:"20px";
+    color:"white";
+}

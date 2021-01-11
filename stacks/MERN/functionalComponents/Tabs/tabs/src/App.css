@@ -1,0 +1,127 @@
+/* .body{
+  background-image: url(https://wallpapercave.com/wp/wp2528835.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+} */
+
+html { 
+  background-image: url(https://wallpapercave.com/wp/wp2528835.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.Div{
+  display:"flex";
+  justify-content:"center"
+}
+
+
+.TabDiv {
+  background-color:"black";
+  height:"30px";
+  width:"100px";
+  margin:"20px";
+  color:"white";
+}
+
+.TabsHolder{
+  display: flex;
+  justify-content: center;
+}
+.TabsDiv{
+  margin: 5px;
+  width: 105%;
+  /* height: 50px; */
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px gray;
+  font-variant: small-caps;
+  vertical-align: middle;
+  text-align: center;
+}
+.TabsDiv p {
+  font-size: 35px;
+  vertical-align: middle;
+}
+.TabsDiv p a {
+  text-decoration: none;
+  color: white;
+}
+.ContentHolder{
+  border: 1px solid black;
+  height: auto;
+  padding: 10px;
+  background-image:radial-gradient(gray,green, orange, gray);
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px gray;
+}
+.divName{
+  font-size: 35px;
+}
+.App {
+  text-align: center;
+  width: 900px;
+  margin: auto;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.tabNames{
+  font-variant: small-caps;
+}
+
+
+
+
+
+/* **********animations************* */
+
+/* .ContentHolder-enter {
+  opacity: 0;
+}
+.ContentHolder-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.ContentHolder-exit {
+  opacity: 1;
+}
+.ContentHolder-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+} */
+/* ************appear */
+.fade-appear{
+  opacity: 0;
+}
+.fade-appear.fade-appear-active{
+  opacity: 1;
+  transition: opacity 300ms linear;
+}
+/* ***********exit */
+.fade-exit{
+  opacity: 1;
+}
+.fade-exit.fade-exit-active{
+  opacity: 0;
+  transition: opacity 300ms linear;
+}
+.fade-exit-done{
+  opacity: 1;
+}
+/* *************enter */
+.fade-enter{
+  opacity: 0;
+}
+.fade-enter.fade-enter-active{
+  opacity: 1;
+  transition: opacity 300ms linear;
+}
