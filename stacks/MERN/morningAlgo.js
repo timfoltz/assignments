@@ -289,7 +289,138 @@ let Partition = (arr, left, right) => {
 
 console.log(Partition([5, 3, 2, 7, 1, 4, 6]))
 
-// ************************JAN 8 2021***************************
+// ************************JAN 11 2021***************************
+
+// function intersection(arr1, arr2) {
+//   if (arr1.length < 1 ){
+//     return;
+//   }
+//   if (arr2.length < 1 ){
+//     return;
+//   }
+//   let newArr = [];
+//   let test = 0;
+
+
+// 	for (let i,j=0; i<arr1.length; i++) {
+// 		test = arr1[i];
+//     console.log("arr 1 ",test)
+// 	}
+
+// 	for (let j=0; j<arr2.length; j++) {
+// 			if(arr2[j] == test){
+//         console.log("yes")
+// 				console.log("arr 2 ",arr2[j]);
+//       }
+// 	}
+  
+
+// 	return newArr; 
+// }
+// console.log(intersection([1,2,2,3,4,4,5], [2,3,4,4,5,6]))
+
+/* destructively finds the intersection of 
+ * two arrays in a simple fashion.  
+ *
+ * PARAMS
+ *  a - first array, must already be sorted
+ *  b - second array, must already be sorted
+ *
+ * NOTES
+ *  State of input arrays is undefined when
+ *  the function returns.  They should be 
+ *  (prolly) be dumped.
+ *
+ *  Should have O(n) operations, where n is 
+ *    n = MIN(a.length, b.length)
+ */
+// function intersection_destructive(a, b)
+// {
+//   var result = [];
+//   while( a.length > 0 && b.length > 0 )
+//   {  
+//      if      (a[0] < b[0] ){ a.shift(); consle.log(r)}
+//      else if (a[0] > b[0] ){ b.shift(); }
+//      else /* they're equal */
+//      {
+//        result.push(a.shift());
+//        b.shift();
+//      }
+//   }
+
+//   return result;
+// }
+
+// console.log(intersection_destructive([1,2,2,3,4,4,5], [2,3,4,4,5,6]))
+
+
+
+// Intersect Sorted Arrays
+
+// Combine two already sorted multiset arrays into
+// an array containing the sorted set intersection of the two.
+
+// Only the shared values between the two arrays, deduped (without duplicates).
+
+// input: [1,2,2,2,7], [2,2,6,6,7]
+// output: [2,7]
+
+// function intersection(arr1, arr2) {}
+
+// arrays are always sorted
+// arrays may be different length
+// all values will be positive integers
+
+{
+    // inputs are always to be sorted
+    // not the same length
+    // negative numbers? no
+    // output has to be sorted? yes
+    // space constraints (return a new array)
+    // no speed constraints ( ideal O(n) )
+    // can the arrays be empty? yes
+    // can the arrays have floats or doubles? no, always integers
+    // fail case: empty array
+    }
+    
+    
+    function intersect_arrays(arr1, arr2) {
+    // place holder arr for matching values
+        var common = [];
+        var i = 0;
+        var j = 0;
+      // while i is less than length of arr1 and arr 2
+        while (i < arr1.length
+               && j < arr2.length)
+        {
+          // compare values of 2 indexes in 2 arrays
+            if (arr1[i] === arr2[j]) {
+              // if its not in common then push
+    
+              if(arr1[i] != common[common.length-1] || arr2[j] != common[common.length-1]){ //check for index of arr in if
+                common.push(arr1[i]);
+              }
+                //common[common.length]
+                i++;
+                j++;
+            }
+            // increase i 
+            else if(arr1[i] < arr2[j]) {
+                i++;
+            }
+            // increament j
+            else {
+                j++;
+            }
+        }
+        // return the placeholder arr
+        return common;
+    }
+    
+    console.log(intersect_arrays([1,2,2,3,3,2,7,8,9], [2,2,3,6,6,7,9]))
+
+// ************************JAN  2021***************************
+
 
 
 
