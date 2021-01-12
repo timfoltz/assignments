@@ -2,26 +2,23 @@ import './App.css';
 import React, {useState} from 'react'
 import PokeFetch from './components/Fetch';
 import ViewPoke from './components/ViewPoke';
+import axios from 'axios';
 
 function App() {
 
   const [pokemon, setPokemon] = useState([]);
 
   const connectLink = () =>{
-    fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=807')
-    .then(response => response.json())
-    .then(response => setPokemon(response.results))
+    axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=807')
+      .then(response=>{setPokemon(response.data.results)});
+    // .then(response => response.json())
+
+    // .then(response => setPokemon(response.results))
   }
   
 
 
   
-  // useEffect(() => {
-  //   fetch(pokeLink)
-  //   .then(response => response.json())
-  //   .then(response => setPokemon(response.results))
-  //   console.log(pokeLink)
-  // }, [pokeLink]);
 
 
   return (

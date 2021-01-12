@@ -4,14 +4,11 @@ import React from 'react';
 
 const PokeFetch = ({connectLink}) =>{
 
-    // const fetchPoke = (e) =>{
-    
-    // }
 
     return (
         <div>
 
-            <button onClick = { connectLink }>Fetch Pokemon</button>
+            <button  onClick = { connectLink }>Fetch Pokemon</button>
         </div>
 
 
