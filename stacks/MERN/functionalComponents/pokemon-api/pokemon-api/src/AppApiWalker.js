@@ -11,9 +11,9 @@ function App() {
 	
 	const [selectSearchType, setSelectSearchType] = useState("")
 	const [selectIndexNumber, setSelectIndexNumber] = useState("")
-	const [searchResult, setSearchResult] = useState([])
+	const [searchResult, setSearchResult] = useState({})
 	const [homeworld, setHomeworld] = useState([])
-
+	const [homeID, setHomeID] = useState("")
 
 
 	const handleSearch = (e) =>{
@@ -22,13 +22,18 @@ function App() {
 		console.log("TYPE=========>",selectSearchType)
 		axios.get(`https://swapi.dev/api/${selectSearchType}/${selectIndexNumber}/`)
 			.then(response=>{
-				setSearchResult([response.data])
+				setSearchResult(response.data)
 		if(selectSearchType === "people"){
 			const homeworldUrl = response.data.homeworld;
 			axios.get(homeworldUrl)
 				.then(response=>{
-					setHomeworld([response.data.name])})
-				.catch(err=>{navigate('/error/')
+					setHomeworld([response.data.name])
+					const resHomeID = homeworldUrl.split("/")
+					setHomeID(resHomeID.filter(val=> val>0))
+
+				// 	.catch(err=>{
+				// 		navigate('/error/')
+				// })
 			})
 			
 		}
@@ -45,6 +50,16 @@ function App() {
 		setSelectIndexNumber("");
 }
 
+	const goToHomeworld = (home) =>{
+		axios.get(`https://swapi.dev/api/planets/${home}/`)
+		.then(response=>{
+			setSearchResult(response.data)
+			navigate(`/planets/${home}/`)
+		.catch(err=>{
+			navigate('/error/')
+			});
+		})
+	}
 return (
 	<div className="App">
 		<Link to="/">Back To Home</Link>
@@ -65,11 +80,11 @@ return (
 	</form>
 	{/* {JSON.stringify(selectSearchType)}
 	{JSON.stringify(selectIndexNumber)} */}
-	{JSON.stringify(searchResult)}
-	{JSON.stringify(homeworld)}
+	{/* {JSON.stringify(searchResult)} */}
+	{JSON.stringify(homeID)}
 	
 	<Router>
-		<People path='/people/:id/' searchResult={searchResult} homeworld={homeworld}/>
+		<People path='/people/:id/' searchResult={searchResult} homeworld={homeworld} homeID={homeID} goToHomeworld={goToHomeworld}/>
 		<World path='/planets/:id/' searchResult={searchResult}/>
 		<Starship path='/starships/:id/' searchResult={searchResult}/>
 		<ErrorPage path='/error/' />
