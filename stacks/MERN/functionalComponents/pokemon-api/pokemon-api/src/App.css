@@ -1,12 +1,13 @@
 /* *{
-  background-color: #282c34;
+  background-color: gray;
 
 } */
 
 .App {
   text-align: center;
-  /* color: antiquewhite; */
-  /* background-color: #282c34; */
+  color: antiquewhite;
+  background-color: #282c34;
+  height: ;
 }
 
 .App-logo {
@@ -34,7 +35,9 @@
 .App-link {
   color: #61dafb;
 }
-
+.Error {
+  backgroundImage: url(https://starwarsblog.starwars.com/wp-content/uploads/2017/06/25-star-wars-quotes-obi-wan-kenobi-identification-tall.jpg);
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

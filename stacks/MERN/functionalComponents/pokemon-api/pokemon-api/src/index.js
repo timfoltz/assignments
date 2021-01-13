@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './AppReachRouting';
+import App from './AppApiWalker';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
