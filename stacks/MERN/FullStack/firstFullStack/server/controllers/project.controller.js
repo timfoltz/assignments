@@ -25,6 +25,7 @@ module.exports.createProject= (request, response) =>{
         .catch(err=>response.json(err))
 }
 
+
 module.exports.findAllProjects = (req, res) => {
     Projects.find()
         .then(allDaProjects => res.json({ projects: allDaProjects }),
@@ -36,5 +37,19 @@ module.exports.findAllProjects = (req, res) => {
 module.exports.findOneProject = (req, res) => {
     Projects.findOne({_id:req.params.id})
         .then(project => res.json(project))
+        .catch(err => res.json({ message: "Something went wrong", error: err }));
+};
+
+
+module.exports.updateProject = (req, res) => {
+    Projects.findOneAndUpdate({_id:req.params.id}, req.body)
+        .then(updatedProject => res.json(updatedProject))
+        .catch(err => res.json({ message: "Something went wrong", error: err }));
+};
+
+
+module.exports.deleteProject = (req, res) => {
+    Projects.deleteOne({_id:req.params.id}, req.body)
+        .then(deleteConf => res.json(deleteConf))
         .catch(err => res.json({ message: "Something went wrong", error: err }));
 };

@@ -10,10 +10,10 @@ import DisplayProjectRequests from '../components/DisplayProjectRequests';
 export default () => {
 
     const [projectsList, setProjectsList] = useState([]);
-    const [loaded, setLoaded] = useState(false)
-
+    const [loaded, setLoaded] = useState(false);
+    const [hasUpdated, setHasUpdated] = useState(false);
     useEffect (() =>{
-        axios.get('http://localhost:8000/api/view/projects',)
+        axios.get('http://localhost:8000/api/viewall/projects',)
         .then(res=>{
             setProjectsList(res.data.projects)
             setLoaded(true)
@@ -23,11 +23,15 @@ export default () => {
         })
     },[]);
 
+    const removeFromDom = projectId =>{
+        setProjectsList(projectsList.filter(project => project._id !==projectId));
+    }
+
     return (
         <div>
-            <ProjectForm />
+            <ProjectForm  setHasUpdated={setHasUpdated} removeFromDom={removeFromDom}/>
             <hr/>
-            {loaded && <DisplayProjectRequests project={projectsList}/>}
+            {loaded && <DisplayProjectRequests project={projectsList} removeFromDom={removeFromDom}/>}
         </div>
     )
 

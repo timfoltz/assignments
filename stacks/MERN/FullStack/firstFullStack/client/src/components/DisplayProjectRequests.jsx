@@ -1,21 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
-import { Link } from '@reach/router';
+import { Link, navigate} from '@reach/router';
 // import { response } from 'express';
 
-const DisplayProjectRequests = ({project}) =>{
+const DisplayProjectRequests = ({project,id, removeFromDom}) =>{
+    // const deleteThisProj = id
 
-    // const [database, setDatabase] = useState([]);
-
-    // useEffect (() =>{
-    //     axios.get('http://localhost:8000/api/view/projects',)
-    //     .then(res=>{
-    //         setDatabase(res.data.projects)
-    //     })
-    //     .catch(err=>{
-    //         console.log("There was an error: ",err)
-    //     })
-    // },[]);
+    const deleteProject = (projectId) => {
+        axios.delete('http://localhost:8000/api/view/delete/' + projectId)
+        .then(res => {
+            removeFromDom(projectId);
+        })
+    }
+    
 
     return(
         <div>
@@ -30,6 +27,11 @@ const DisplayProjectRequests = ({project}) =>{
                 <p> {data.title}</p>
                     <p key={idx+data._id}>${data.price}.00</p>
                     <p key={idx+data._id}>{data.description}</p>
+                    <button 
+                    style={{backgroundColor:"red", borderRadius:"10px"}}
+                    onClick={(e)=>{deleteProject(data._id)}}>
+                        Delete Project
+                        </button>
                 </div>
             )}
             </div>

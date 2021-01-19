@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import { navigate } from '@reach/router';
 
 
-const ProjectForm = (props) =>{
+const ProjectForm = ({setHasUpdated}) =>{
     
     const [title, setTitle] = useState("")
     const [price, setPrice] = useState("")
@@ -15,7 +16,8 @@ const ProjectForm = (props) =>{
             price,
             description,
         })
-            .then(res=>console.log("Response: ", res))
+            .then(res=> {setHasUpdated(true);
+                        setHasUpdated(false)})
             .catch(err=>console.log("Error: ", err))
 
     }
@@ -35,7 +37,7 @@ const ProjectForm = (props) =>{
                 </p>
                 <p>
                 <label htmlFor="Description">Description</label>
-                <input type="text" name="Description" onChange ={e => setDescription(e.target.value)}/>
+                <input type="textarea" name="Description" onChange ={e => setDescription(e.target.value)}/>
                 </p>
                 <input type="submit" value="Submit"/>
             </form>
