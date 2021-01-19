@@ -31,3 +31,10 @@ module.exports.findAllProjects = (req, res) => {
         console.log(res))
         .catch(err => res.json({ message: "Something went wrong", error: err }));
 };
+
+
+module.exports.findOneProject = (req, res) => {
+    Projects.findOne({_id:req.params.id})
+        .then(project => res.json(project))
+        .catch(err => res.json({ message: "Something went wrong", error: err }));
+};
