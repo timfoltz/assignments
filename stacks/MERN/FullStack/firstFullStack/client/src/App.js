@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       {/* <Main/> */}
       <Router>
-        <Main path="project/" />
+        <Main path="/" />
         <Details path="view/:id" />
         <Update path="view/update/:id" />
       </Router>
