@@ -4,18 +4,27 @@ import { Link } from '@reach/router';
 
 
 
-const pst = ({todos}) =>{
+
+const List = ({todos, updateAPI}) =>{
+
+    const checkBoxHandler = (completed,id) => {
+        // const status = !completed;
+        updateAPI({completed: completed},id)
+    }
 
     return (
-        <div style={{textAlign:"center"}}>
-            <Link to="/new" style={{color:'black', background:"gray", borderRadius:"10px", width:"80px", textDecoration:"none"}}>Create New</Link>
+        <div style={{textAlign:"center", padding:"30px"}}>
+            <Link to="/new" className="links">Create New</Link>
                 {
             todos.map((todo,idx) =>
-                <div key={idx} style={{border: "1px solid lightBlue", margin:"5px"}}>
+                <div key={idx} >
                     <h3><Link to={`/show/${todo._id}`}>{todo.title}</Link></h3>
                     <p>{todo.desc}</p>
-                    <p style={{border:"1px solid green"}}>Completed:
-                        <input type="checkbox" value={todo.completed}/>
+                    <p>Completed:
+                        <input 
+                        type="checkbox" 
+                        checked={todo.completed} 
+                        onChange={e =>checkBoxHandler(e.target.checked,todo._id)} />
                     </p>
                 </div>
             )
@@ -26,4 +35,4 @@ const pst = ({todos}) =>{
     )
 }
 
-export default pst
+export default List

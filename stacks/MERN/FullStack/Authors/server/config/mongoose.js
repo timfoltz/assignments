@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
-const db = "template-todos"
+const db = "authors"
 
 
 
 mongoose.connect(`mongodb://localhost/${db}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false   
+    useFindAndModify: true   
 })
-.then(()=> console.log(`you have connected to the ${db}`))
+.then(()=> console.log(`you have connected to the ${db} DB`))
 .catch((err) => console.log(err))
 
 
 
-require("../models/Todo")
+require("../models/Author")

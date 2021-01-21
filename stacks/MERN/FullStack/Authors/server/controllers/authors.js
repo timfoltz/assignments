@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const Todo = mongoose.model('Todo');
+const Author = mongoose.model('Author');
 
 
 
 module.exports = {
     create: (req, res) =>{
-        Todo.create(req.body)   // trip to DB
+        Author.create(req.body)   // trip to DB
             .then(item => {    // <======= on success
                     console.log(item);
                     res.json(item);
@@ -16,22 +16,22 @@ module.exports = {
             })
     },
     findAll: (req, res) => {
-        Todo.find()
-            .then(todos => res.json(todos))
+        Author.find()
+            .then(authors => res.json(authors))
             .catch(err => res.status(400).json(err))
     },
     findOne: (req, res) => {
-        Todo.findOne({_id: req.params.id})
-            .then(todo => res.json(todo))
+        Author.findOne({_id: req.params.id})
+            .then(author => res.json(author))
             .catch(err => res.status(400).json(err))
     },
     update: (req, res) => {
-        Todo.findOneAndUpdate({_id: req.params.id}, req.body,{new:true, runValidators:true})
-            .then(todo => res.json(todo))
+        Author.findOneAndUpdate({_id: req.params.id}, req.body,{new:true,runValidators:true})
+            .then(author => res.json(author))
             .catch(err => res.status(400).json(err))
     },
     delete: (req, res) => {
-        Todo.deleteOne({_id: req.params.id})
+        Author.deleteOne({_id: req.params.id})
             .then(success => res.json(success))
             .catch(err => res.status(400).json(err))
     },

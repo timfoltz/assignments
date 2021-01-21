@@ -4,21 +4,19 @@ import {Link} from "@reach/router"
 // import '../App.css'
 
 
-const Todo = ({id}) =>{
+const Author = ({id}) =>{
 
-    const [todo, setTodo] = useState({
-        completed: false,
+    const [author, setAuthor] = useState({
         createdAt: Date.now(),
-        desc: "",
-        title: "",
+        name: "",
         updatedAt: Date.now()
     });
 
     useEffect(()=>{
-        axios.get(`http://localhost:8888/todos/${id}`)
+        axios.get(`http://localhost:8888/authors/${id}`)
             .then(res =>{
                 console.log(res);
-                setTodo(res.data)
+                setAuthor(res.data)
             })
             .catch(err =>{
                 console.log(err);
@@ -29,10 +27,8 @@ const Todo = ({id}) =>{
         <div style={{padding: "30px"}}>
 
             <Link className="links" to="/" >Home</Link>
-            <p>{todo.title}</p>
-            <p>{todo.desc}</p>
-            <p>{todo._id}</p>
-            <p><input type="checkbox" checked={todo.completed}/></p>
+            <p>{author.name}</p>
+            <Link className="links" to={`/edit/${author._id}`} >Edit {author.name}</Link>
 
 
 
@@ -40,4 +36,4 @@ const Todo = ({id}) =>{
     )
 }
 
-export default Todo
+export default Author

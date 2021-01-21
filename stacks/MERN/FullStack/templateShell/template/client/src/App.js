@@ -21,18 +21,41 @@ const [todos, setTodos] = useState([])
         setTodos(res.data)
       })
       .catch(err =>{
-        console.log(err)
       });
   }, [])
+
+  const addTodo = (todo) => {
+    setTodos([...todos,todo])
+  }
+  
+  const updateTodo = (changedTodo, id) => {
+    setTodos( todos.map(todo => {
+      if(todo._id === id){
+        return changedTodo;
+      }
+      return todo;
+    }))
+  }
+
+  const updateAPI = (data,id) => {
+    axios.put(`http://localhost:8888/todos/${id}`,data)
+    .then(res =>{
+      console.log(res);
+      updateTodo(res.data, id);
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  };
+
   return (
     <div className="App">
       <div>
         <Router>
-          <List path="/" todos={todos}/>
-          <Create path="/new"/>
+          <List path="/" todos={todos} updateAPI={updateAPI}/>
+          <Create path="/new" addTodo={addTodo}/>
           <Edit path="/edit/:id"/>
           <Todo path="/show/:id"/>
-
         </Router>
 
         
