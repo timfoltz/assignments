@@ -5,54 +5,56 @@ import axios from 'axios'
 import List from './views/List';
 import Create from './views/Create';
 import Edit from './views/Edit';
-import Todo from './views/Todo';
+import Player from './views/Player';
 
 
 
 function App() {
 
-const [todos, setTodos] = useState([])
+const [players, setPlayers] = useState([])
 
 
   useEffect(()=>{
 
-    axios.get('http://localhost:8888/todos')
+    axios.get('http://localhost:8888/player')
       .then(res =>{
-        setTodos(res.data)
+        setPlayers(res.data)
       })
       .catch(err =>{
       });
   }, [])
 
-  const addTodo = (todo) => {
-    setTodos([...todos,todo])
+  
+
+  const addPlayer = (player) => {
+    setPlayers([...players,player])
   }
   
-  const updateTodo = (changedTodo, id) => {
-    setTodos( todos.map(todo => {
-      if(todo._id === id){
-        return changedTodo;
+  const updatePlayer = (changedPlayer, id) => {
+    setPlayers( players.map(player => {
+      if(player._id === id){
+        return changedPlayer;
       }
-      return todo;
+      return player;
     }))
   }
 
-  const deleteTodo =(id) => {
-    const changedTodos = todos.filter((todo) => {
-      if(todo._id === id){
+  const deletePlayer =(id) => {
+    const changedPlayers = players.filter((player) => {
+      if(player._id === id){
         return false;
       }
       return true;
     })
-    setTodos(changedTodos)
+    setPlayers(changedPlayers)
 
   }
 
   const updateAPI = (data,id) => {
-    axios.put(`http://localhost:8888/todos/${id}`,data)
+    axios.put(`http://localhost:8888/player/${id}`,data)
     .then(res =>{
       console.log(res);
-      updateTodo(res.data, id);
+      updatePlayer(res.data, id);
     })
     .catch(err => {
       console.log(err)
@@ -60,10 +62,12 @@ const [todos, setTodos] = useState([])
   };
 
   const deleteAPI = (id) => {
-    axios.delete(`http://localhost:8888/todos/${id}`)
+
+    
+    axios.delete(`http://localhost:8888/player/${id}`)
     .then(res => {
       console.log(res)
-      deleteTodo(id)
+      deletePlayer(id)
     })
     .catch(err =>{
       console.log(err)
@@ -76,12 +80,12 @@ const [todos, setTodos] = useState([])
       <div>
         <Router>
           <List path="/" 
-            todos={todos} 
+            players={players} 
             updateAPI={updateAPI}
             deleteAPI={deleteAPI}/>
-          <Create path="/new" addTodo={addTodo}/>
-          <Edit path="/edit/:id" updateAPI={updateAPI}/>
-          <Todo path="/show/:id" updateAPI={updateAPI}/>
+          <Create path="/new" addPlayer={addPlayer}/>
+          {/* <Edit path="/edit/:id" updateAPI={updateAPI}/> */}
+          <Player path="/show/:id" updateAPI={updateAPI}/>
         </Router>
 
         

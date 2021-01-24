@@ -640,7 +640,6 @@ const Balloons = (text, word = "balloon") => {
     let count = Infinity; // assume we have Infinity possible instances
     let wordDict = {}; // dicts for words and text
     let textDict = {};
-
     // build a dictionary out of the letters we want
     for (let letter of word) {
 
@@ -649,22 +648,14 @@ const Balloons = (text, word = "balloon") => {
         }else{
             wordDict[letter] = 1;
         }
-        // wordDict.hasOwnProperty(letter) ?
-        //     wordDict[letter]++
-        // :
-        //     wordDict[letter] = 1;
     }
-
     // build a dictionary out of the letters we have
     for (let letter of text) {
         textDict.hasOwnProperty(letter) ? textDict[letter]++ : textDict[letter] = 1;
     }
-
     // log the dicts for posterity
     console.log('text', textDict);
     console.log('words', wordDict);
-
-
     // loop over the letters we want
     for (let key of Object.keys(wordDict)) {
         // "b"
@@ -914,3 +905,80 @@ Output: ["Longvida Curcumin"]
 Input: ["existential dread"], medications
 Output: []
 */
+
+
+// ****************************JAN 21 2021***********************
+
+/*
+Create a function to determine the max amount of
+servings that can be made based on a recipe and
+available ingredients.
+
+Input:
+    - recipe object where keys are ingredient names
+    and values are unit required (int)
+    - available ingredients object where keys are ingredient
+    names and values are unit available (int)
+Output:
+    int (max servings)
+
+Side note (possible extra challenge version): Realistically, the values
+would be an object as well with the keys: unit (unit of measure), and amount.
+If the available ingredient was stored in a different unit,
+a conversion table would be needed to convert units of measure.
+*/
+
+// Example Input
+const recipe = {
+    "organic fat": 99,
+    "live squid": 1,
+    "birds nest": 1,
+    "fried flesh": 1,
+    "spicy": 5,
+    "gourmet memes": 4200,
+};
+
+const available = {
+    "organic fat": 200,
+    "live squid": 5,
+    "birds nest": 10,
+    "fried flesh": 10,
+    "spicy": 50,
+    "gourmet memes": 42000,
+    "sugar": 9001,
+    "spice": 5,
+    "everything nice": 1,
+};
+
+// Output: 1 because only 1 live squid is available
+// Output: 10 IF we had 10 live squids because then we have 10x of every ingredient
+// Output: 0 IF we had 0 live squids or live squids key didn't exist in 'available'
+
+function getMaxServings(recipe, ingredients) {
+    let count = 0;
+    // recipe items
+    let items = Object.keys(recipe);
+    // in our cupboard
+    let available = Object.keys(ingredients);
+    // iterate over recipe (object.keys(recipe).map())
+
+    while (true) {
+    for (let i = 0; i < items.length; i++) {
+        if (available.includes(items[i])) {
+        if (ingredients[items[i]] - recipe[items[i]] >= 0) {
+            ingredients[items[i]] = ingredients[items[i]] - recipe[items[i]];
+        } else {
+            return count;
+        }
+        } else {
+        continue;
+        }
+    }
+    count++;
+    }
+}
+
+console.log(getMaxServings(recipe, available));
+
+// cool thanks
+

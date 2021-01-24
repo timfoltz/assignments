@@ -6,7 +6,8 @@ import {Link, navigate} from '@reach/router'
 const Edit = ({id,updateAPI}) =>{
 
     const [title,setTitle] = useState("")
-    const [desc,setDesc] = useState("")
+    const [position,setPosition] = useState("")
+    const [gameOne, setGameOne] = useState()
     const [errorMessages, setErrorMessagess] = useState([])
 
     useEffect(()=>{
@@ -14,7 +15,7 @@ const Edit = ({id,updateAPI}) =>{
             .then(res =>{
                 console.log(res);
                 setTitle(res.data.title)
-                setDesc(res.data.desc)
+                setPosition(res.data.position)
             })
             .catch(err =>{
                 console.log(err);
@@ -26,7 +27,7 @@ const Edit = ({id,updateAPI}) =>{
 
         const updatedTodo = {
             title: title,
-            desc:desc
+            position:position
         }
 
         updateAPI(updatedTodo, id);
@@ -42,21 +43,21 @@ const Edit = ({id,updateAPI}) =>{
 
         <form onSubmit={formHandler}>
             {errorMessages.map((error,idx)=><p key={idx} style={{color:"red"}}>{error}</p>)}
-            <p>Title:</p>
-            {title.length >0 && title.length <3 ? <p className="errorP">Title Must be at least 3 characters!</p>: ""}
+            <p>title:</p>
+            {title.length >0 && title.length <3 ? <p className="errorP">title Must be at least 3 characters!</p>: ""}
             <input 
                 type="text" 
                 required
                 value={title} 
                 onChange= {e =>setTitle(e.target.value)}/>
-            <p>Description:</p>
-            {desc.length >0 && desc.length <5 ? <p className="errorP">Description Must be at least 5 characters!</p>: ""}
+            <p>positionription:</p>
+            {position.length >0 && position.length <5 ? <p className="errorP">positionription Must be at least 5 characters!</p>: ""}
 
             <input 
                 type="text" 
                 required
-                value={desc} 
-                onChange= {e => setDesc(e.target.value)}/>
+                value={position} 
+                onChange= {e => setPosition(e.target.value)}/>
                 <br/>
             <input type="submit" value="Create"/>
         </form>

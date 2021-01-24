@@ -4,7 +4,7 @@ import {Link} from "@reach/router"
 // import '../App.css'
 
 
-const Todo = ({id}) =>{
+const Todo = ({id, updateAPI}) =>{
 
     const [todo, setTodo] = useState({
         completed: false,
@@ -23,7 +23,16 @@ const Todo = ({id}) =>{
             .catch(err =>{
                 console.log(err);
             })
-    },[])
+    },[id])
+
+    const checkBoxHandler = (completed,id) => {
+        const changedTodo = {...todo};
+        changedTodo.completed = completed;
+        setTodo(changedTodo);
+        updateAPI({completed: completed},id);
+    }
+
+
 
     return (
         <div style={{padding: "30px"}}>
@@ -32,7 +41,12 @@ const Todo = ({id}) =>{
             <p>{todo.title}</p>
             <p>{todo.desc}</p>
             <p>{todo._id}</p>
-            <p><input type="checkbox" checked={todo.completed}/></p>
+            <p><input 
+                type="checkbox" 
+                checked={todo.completed}
+                onChange={e => checkBoxHandler(e.target.checked, todo._id)}/>
+            </p>
+            <Link className="links" to={`/edit/${id}`} >Edit</Link>
 
 
 
