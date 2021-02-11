@@ -8,6 +8,7 @@ public class ProjectTest {
         
         
         System.out.println(coffee);
+        System.out.println("before" + coffee.getName());
         coffee.setName("Buy Coffee");
         System.out.println(coffee.getName());
         System.out.println("Description: " + makeCoffee.getDescription());
