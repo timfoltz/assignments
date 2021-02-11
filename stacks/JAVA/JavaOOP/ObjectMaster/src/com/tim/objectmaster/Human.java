@@ -11,7 +11,7 @@ public class Human {
 		
 	}
 	public Human(String name) {
-		this.name = name;
+		this.setName(name);
 		
 	}
 
@@ -49,6 +49,12 @@ public class Human {
 	
 	public void attack(Human h) {
 		h.setHealth(h.getHealth()-this.getStrength());
-		System.out.println("Health reduced by: " + this.getStrength()+" " + h.name +"'s health remaining is: "+h.getHealth());
+		System.out.println("Health reduced by: " + this.getStrength()+" " + h.getName() +"'s health remaining is: "+h.getHealth());
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }
