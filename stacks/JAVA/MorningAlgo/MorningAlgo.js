@@ -5,6 +5,7 @@
 // ******************Feb 10 2021*************
 // morning algos
 // singly linked list
+let numberOfNodes = 0;
 
 class Node {
   constructor(data) {
@@ -19,8 +20,12 @@ class SLL {
       this.head = null
   }
   // console.log the data of every node in the current list
+  size() {
+    console.log(`There are ${numberOfNodes} nodes`);
+}
+
   read() {
-      var runner = this.head
+      let runner = this.head
       while (runner) {
           console.log(runner.data)
           runner = runner.next
@@ -30,7 +35,7 @@ class SLL {
   }
   //find: return true/false if current list contains a data equal to value
   contains(value) {
-      var runner = this.head
+      let runner = this.head
       while (runner) {
           if (runner.data === value) {
               return true
@@ -42,7 +47,7 @@ class SLL {
   }
   // Remove from front: remove and return the first node in SLL
   removeFromFront() {
-      var temp = this.head
+      let temp = this.head
       this.head = this.head.next
       temp.next = null
       return temp
@@ -69,14 +74,14 @@ class SLL {
   }
   // create new node with given data, add it to the head, return void
   addDataToFront(data) {
-      var newNode = new Node(data) // create a new node with the data
+      let newNode = new Node(data) // create a new node with the data
       newNode.next = this.head // set the new node's next to the head
       this.head = newNode // move the head to the new node
   }
 
 }
 
-var mySLL = new SLL()
+let mySLL = new SLL()
 mySLL.addDataToFront(10)
 mySLL.addDataToFront(100)
 mySLL.addDataToFront(1000)
@@ -89,6 +94,8 @@ mySLL.removeFromFront()
 mySLL.read()
 console.log(mySLL.contains(100))
 console.log(mySLL.contains(50))
+
+console.log(mySLL.size())
 // var node = new Node(10)
 // node.data = 10
 // node.next = new Node()
@@ -106,46 +113,46 @@ console.log(mySLL.contains(50))
 
 // console.log(runner.data) // prints 5
 // ******************Feb 9 2021*************
-class Node {
-    constructor(data) {
-      this.data = data;
-      this.next = null; // access to get to another object -- NULL is the default value
-    }
-  }
+// class Node {
+//     constructor(data) {
+//       this.data = data;
+//       this.next = null; // access to get to another object -- NULL is the default value
+//     }
+//   }
   
-  class SLL {
-    constructor() {
-      this.head = null; // very FIRST element is defaulted to NULL
-    }
+//   class SLL {
+//     constructor() {
+//       this.head = null; // very FIRST element is defaulted to NULL
+//     }
   
-    // return true or false if this.head is null
-    isEmpty() {
-      if (this.head) {
-        return true;
-      } else {
-        return false;
-      }
-    }
+//     // return true or false if this.head is null
+//     isEmpty() {
+//       if (this.head) {
+//         return true;
+//       } else {
+//         return false;
+//       }
+//     }
   
-    // add given node to the head, if it exists. return void
-    addToFront(node) {
-      if (this.head) {
-        node.next = this.head;
-        this.head = node;
-      } else {
-        this.head = node;
-      }
-    }
+//     // add given node to the head, if it exists. return void
+//     addToFront(node) {
+//       if (this.head) {
+//         node.next = this.head;
+//         this.head = node;
+//       } else {
+//         this.head = node;
+//       }
+//     }
   
-    // create a new node with given data, add it to the head. return void
-    addDataToFront(data) {
-      var newNode = node(data);
-      newNode.addToFront();
-    }
-  }
+//     // create a new node with given data, add it to the head. return void
+//     addDataToFront(data) {
+//       var newNode = node(data);
+//       newNode.addToFront();
+//     }
+//   }
   
-  var node = new Node(10);
-  var mySLL = new SLL();
+//   var node = new Node(10);
+//   var mySLL = new SLL();
   // mySLL.addToFront();
   
   // NOTES:
