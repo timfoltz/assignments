@@ -86,3 +86,13 @@ nb-configuration.xml
 ## OS X
 ##############################
 .DS_Store
+stacks/JAVA/JavaOOP/AbstractExample/src/com/tim/abstractexample/AbstractClass.java
+stacks/JAVA/JavaOOP/AbstractExample/src/com/tim/abstractexample/InterfaceDemo.java
+stacks/JAVA/JavaOOP/AbstractExample/src/com/tim/abstractexample/AbstractDemo.java
+stacks/JAVA/JavaOOP/AbstractExample/src/com/tim/abstractexample/AbstractTester.java
+stacks/JAVA/JavaOOP/AbstractExample/src/com/tim/abstractexample/ClassDemo.java
+stacks/JAVA/JavaOOP/AbstractExample/src/com/tim/abstractexample/SubClassOne.java
+stacks/JAVA/JavaOOP/AbstractExample/src/com/tim/abstractexample/SubClassTwo.java
+stacks/JAVA/JavaOOP/InterfaceExample/src/com/tim/interfaceexample/Bicycle.java
+stacks/JAVA/JavaOOP/InterfaceExample/src/com/tim/interfaceexample/BicycleTest.java
+stacks/JAVA/JavaOOP/InterfaceExample/src/com/tim/interfaceexample/OperateBicycle.java
